@@ -8,3 +8,10 @@ class UserSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class PassengerSelfProfile(BaseModel):
+    email: str
+    username: str
+    surname: str
+    ratings: float

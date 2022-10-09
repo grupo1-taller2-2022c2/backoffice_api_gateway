@@ -6,16 +6,17 @@ import requests
 from fastapi.responses import RedirectResponse
 from starlette import status
 from app.routes.authorization_routes import get_current_admin_email
-from app.schemas import admin_schemas
+from app.schemas import admin_schemas, user_schemas
+from pydantic import EmailStr
 
 router = APIRouter()
 url_base = os.getenv('BACKOFFICE_BASE_URL')
 
 
-@router.post("/signup", response_model=admin_schemas.AdminSchema, status_code=status.HTTP_201_CREATED)
-def admin_signup(user: admin_schemas.AdminSignUpSchema):
-    url = url_base + "/admins/signup"
-    response = requests.post(url=url, json=dict(user))
+@router.get("/", response_model=List[user_schemas.UserSchema], status_code=status.HTTP_200_OK)
+def get_users(_admin_email: EmailStr = Depends(get_current_admin_email)):
+    url = url_base + "/users/"
+    response = requests.get(url=url)
     if response.ok:
         return response.json()
     raise HTTPException(status_code=response.status_code,

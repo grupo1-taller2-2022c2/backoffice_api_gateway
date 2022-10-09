@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import admin_routes, authorization_routes
+from app.routes import admin_routes, authorization_routes, users_admin_routes
 
 app = FastAPI()
 
@@ -23,3 +23,5 @@ def read_root():
 app.include_router(authorization_routes.router, tags=["Auth"])
 app.include_router(admin_routes.router,
                    prefix="/admins", tags=["Admins CRUD"])
+app.include_router(users_admin_routes.router,
+                   prefix="/users", tags=["User Adrministration"])

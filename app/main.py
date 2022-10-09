@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.routes import authorization_routes
 
 app = FastAPI()
 
@@ -19,6 +20,4 @@ def read_root():
     return {"Welcome to": "Backoffice API Gateway"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+app.include_router(authorization_routes.router, tags=["Auth"])

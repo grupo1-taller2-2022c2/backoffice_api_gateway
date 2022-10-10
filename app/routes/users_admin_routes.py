@@ -31,3 +31,13 @@ def get_passenger_profile(user_email: EmailStr):
         return response.json()
     raise HTTPException(status_code=response.status_code,
                         detail=response.json()['detail'])
+
+
+@router.get("/drivers/{user_email}", response_model=user_schemas.DriverSelfProfile, status_code=status.HTTP_200_OK)
+def get_driver_profile(user_email: EmailStr):
+    url = url_base + "/users/drivers/" + user_email
+    response = requests.get(url=url)
+    if response.ok:
+        return response.json()
+    raise HTTPException(status_code=response.status_code,
+                        detail=response.json()['detail'])

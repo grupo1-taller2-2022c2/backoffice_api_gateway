@@ -15,3 +15,12 @@ class PassengerSelfProfile(BaseModel):
     username: str
     surname: str
     ratings: float
+
+
+class DriverSelfProfile(BaseModel):
+    email: str
+    username: str
+    surname: str
+    ratings: float
+    licence_plate: str
+    model: str

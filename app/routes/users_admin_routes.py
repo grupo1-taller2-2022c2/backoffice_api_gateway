@@ -41,3 +41,23 @@ def get_driver_profile(user_email: EmailStr):
         return response.json()
     raise HTTPException(status_code=response.status_code,
                         detail=response.json()['detail'])
+
+
+@router.post("/blocked/{user_email}", status_code=status.HTTP_200_OK)
+def block_user(user_email: EmailStr):
+    url = url_base + "/users/blocked/" + user_email
+    response = requests.post(url=url)
+    if response.ok:
+        return response.json()
+    raise HTTPException(status_code=response.status_code,
+                        detail=response.json()['detail'])
+
+
+@router.post("/unblocked/{user_email}", status_code=status.HTTP_200_OK)
+def unblock_user(user_email: EmailStr):
+    url = url_base + "/users/unblocked/" + user_email
+    response = requests.post(url=url)
+    if response.ok:
+        return response.json()
+    raise HTTPException(status_code=response.status_code,
+                        detail=response.json()['detail'])

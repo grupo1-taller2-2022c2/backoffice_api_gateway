@@ -24,7 +24,7 @@ def get_users(_admin_email: EmailStr = Depends(get_current_admin_email)):
 
 
 @router.get("/passengers/{user_email}", response_model=user_schemas.PassengerSelfProfile, status_code=status.HTTP_200_OK)
-def get_passenger_profile(user_email: EmailStr):
+def get_passenger_profile(user_email: EmailStr, _admin_email: EmailStr = Depends(get_current_admin_email)):
     url = url_base + "/users/passengers/" + user_email
     response = requests.get(url=url)
     if response.ok:
@@ -34,7 +34,7 @@ def get_passenger_profile(user_email: EmailStr):
 
 
 @router.get("/drivers/{user_email}", response_model=user_schemas.DriverSelfProfile, status_code=status.HTTP_200_OK)
-def get_driver_profile(user_email: EmailStr):
+def get_driver_profile(user_email: EmailStr, _admin_email: EmailStr = Depends(get_current_admin_email)):
     url = url_base + "/users/drivers/" + user_email
     response = requests.get(url=url)
     if response.ok:
@@ -44,7 +44,7 @@ def get_driver_profile(user_email: EmailStr):
 
 
 @router.post("/blocked/{user_email}", status_code=status.HTTP_200_OK)
-def block_user(user_email: EmailStr):
+def block_user(user_email: EmailStr, _admin_email: EmailStr = Depends(get_current_admin_email)):
     url = url_base + "/users/blocked/" + user_email
     response = requests.post(url=url)
     if response.ok:
@@ -54,7 +54,7 @@ def block_user(user_email: EmailStr):
 
 
 @router.post("/unblocked/{user_email}", status_code=status.HTTP_200_OK)
-def unblock_user(user_email: EmailStr):
+def unblock_user(user_email: EmailStr, _admin_email: EmailStr = Depends(get_current_admin_email)):
     url = url_base + "/users/unblocked/" + user_email
     response = requests.post(url=url)
     if response.ok:

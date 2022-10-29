@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import admin_routes, authorization_routes, users_admin_routes
+from app.routes import admin_routes, authorization_routes, users_admin_routes, metrics_routes
 
 app = FastAPI()
 
@@ -25,3 +25,5 @@ app.include_router(admin_routes.router,
                    prefix="/admins", tags=["Admins CRUD"])
 app.include_router(users_admin_routes.router,
                    prefix="/users", tags=["User Adrministration"])
+app.include_router(metrics_routes.router,
+                   prefix="/metrics", tags=["Metrics"])

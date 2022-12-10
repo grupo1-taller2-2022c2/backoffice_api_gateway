@@ -5,6 +5,7 @@ class UserSchema(BaseModel):
     email: EmailStr
     username: str
     surname: str
+    blocked: bool
 
     class Config:
         orm_mode = True

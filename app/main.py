@@ -27,4 +27,4 @@ app.include_router(users_admin_routes.router,
                    prefix="/users", tags=["User Adrministration"])
 app.include_router(metrics_routes.router,
                    prefix="/metrics", tags=["Metrics"])
-app.include_router(pricing_routes.router, tags=["Pricing"])
+app.include_router(pricing_routes.router, prefix="/pricing", tags=["Pricing"])

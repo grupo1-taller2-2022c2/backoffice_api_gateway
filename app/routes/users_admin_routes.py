@@ -15,7 +15,7 @@ wallets_url_base = os.getenv("WALLETS_BASE_URL")
 
 
 @router.get(
-    "/", response_model=List[user_schemas.UserSchema], status_code=status.HTTP_200_OK
+    "/", response_model=List[user_schemas.UserFullInfo], status_code=status.HTTP_200_OK
 )
 def get_users(_admin_email: EmailStr = Depends(get_current_admin_email)):
     url = url_base + "/users/"

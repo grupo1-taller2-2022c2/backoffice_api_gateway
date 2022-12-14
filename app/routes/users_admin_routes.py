@@ -87,6 +87,20 @@ def unblock_user(
     )
 
 
+@router.get("/{user_email}/wallet", status_code=status.HTTP_200_OK)
+def get_user_wallet(
+    user_email: EmailStr,
+    _admin_email: EmailStr = Depends(get_current_admin_email),
+):
+    url = url_base + "/users/" + user_email + "/wallet"
+    response = requests.get(url=url)
+    if response.ok:
+        return response.json()
+    raise HTTPException(
+        status_code=response.status_code, detail=response.json()["detail"]
+    )
+
+
 @router.post("/{user_email}/wallet/deposit", status_code=status.HTTP_200_OK)
 def deposit_funds_in_user_wallet(
     user_email: EmailStr,

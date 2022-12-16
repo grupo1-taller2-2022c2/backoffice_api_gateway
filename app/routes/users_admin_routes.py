@@ -12,6 +12,7 @@ from pydantic import EmailStr
 router = APIRouter()
 url_base = os.getenv("BACKOFFICE_BASE_URL")
 wallets_url_base = os.getenv("WALLETS_BASE_URL")
+users_be_url = os.getenv("USERS_BASE_URL")
 
 
 @router.get(
@@ -130,3 +131,24 @@ def get_system_wallet(_admin_email: EmailStr = Depends(get_current_admin_email))
     raise HTTPException(
         status_code=response.status_code, detail=response.json()["detail"]
     )
+
+
+@router.delete("/drivers/reports", status_code=status.HTTP_200_OK)
+def delete_report_with_report_id(report: ReportDelete):
+    url = users_be_url + "/drivers/reports"
+    response = requests.delete(url=url, json=dict(report))
+    if response.ok:
+        return response.json()
+    raise HTTPException(
+        status_code=response.status_code, detail=response.json()["detail"]
+    )
+
+
+@router.get("/drivers/reports/all", status_code=status.HTTP_200_OK)
+def get_drivers_reports():
+    url = users_be_url + "/drivers/reports/all"
+    response = requests.get(url=url)
+    if response.ok:
+        return response.json()
+    raise HTTPException(
+        status_code=response.status_code, detail=response.json()["detail"]

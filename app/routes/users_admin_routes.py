@@ -135,7 +135,7 @@ def get_system_wallet(_admin_email: EmailStr = Depends(get_current_admin_email))
 
 
 @router.delete("/drivers/reports", status_code=status.HTTP_200_OK)
-def delete_report_with_report_id(report: ReportDelete):
+def delete_report_with_report_id(report: ReportDelete, _admin_email: EmailStr = Depends(get_current_admin_email)):
     url = users_be_url + "/drivers/reports"
     response = requests.delete(url=url, json=dict(report))
     if response.ok:
@@ -146,7 +146,7 @@ def delete_report_with_report_id(report: ReportDelete):
 
 
 @router.get("/drivers/reports/all", status_code=status.HTTP_200_OK)
-def get_drivers_reports():
+def get_drivers_reports(_admin_email: EmailStr = Depends(get_current_admin_email)):
     url = users_be_url + "/drivers/reports/all"
     response = requests.get(url=url)
     if response.ok:

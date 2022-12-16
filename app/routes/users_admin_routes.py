@@ -7,7 +7,7 @@ from fastapi.responses import RedirectResponse
 from starlette import status
 from app.routes.authorization_routes import get_current_admin_email
 from app.schemas import admin_schemas, user_schemas
-from app.schemas.user_schemas import *
+from app.schemas.user_schemas import ReportDelete
 from pydantic import EmailStr
 
 router = APIRouter()
@@ -153,3 +153,4 @@ def get_drivers_reports():
         return response.json()
     raise HTTPException(
         status_code=response.status_code, detail=response.json()["detail"]
+    )

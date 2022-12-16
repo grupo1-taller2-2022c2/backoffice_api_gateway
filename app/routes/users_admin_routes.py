@@ -7,6 +7,7 @@ from fastapi.responses import RedirectResponse
 from starlette import status
 from app.routes.authorization_routes import get_current_admin_email
 from app.schemas import admin_schemas, user_schemas
+from app.schemas.user_schemas import *
 from pydantic import EmailStr
 
 router = APIRouter()

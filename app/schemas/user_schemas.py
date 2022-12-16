@@ -51,3 +51,13 @@ class DriverSelfProfile(BaseModel):
 
 class DepositFundsSchema(BaseModel):
     amount_in_ethers: str
+
+
+class DriverReport(BaseModel):
+    driver_email: str
+    trip_id: int
+    reason: str
+
+
+class ReportDelete(BaseModel):
+    report_id: int
